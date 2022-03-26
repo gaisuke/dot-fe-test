@@ -1,9 +1,10 @@
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+/* eslint-disable default-param-last */
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 export const actionTypes = {
-    Login: "login-data",
-    Logout: "logout-data",
+  Login: 'login-data',
+  Logout: 'logout-data',
 };
 
 const initialState = {
@@ -12,31 +13,31 @@ const initialState = {
 };
 
 export const reducer = persistReducer(
-  { storage, key: "authRoot", whitelist: ['auth'] },
+  { storage, key: 'authRoot', whitelist: ['auth'] },
   (state = initialState, action) => {
-    //state = [] , action
+    // state = [] , action
     switch (action.type) {
       case actionTypes.Login: {
-          console.log("action")
-        let auth = action?.payload?.data;
-        console.log({auth})
-        return { auth: auth };
+        console.log('action');
+        const auth = action?.payload?.data;
+        console.log({ auth });
+        return { auth };
       }
       case actionTypes.Logout: {
-          console.log("action logout")
-      return { auth: {} };
-    }
+        console.log('action logout');
+        return { auth: {} };
+      }
 
       default:
         return state;
     }
-  }
+  },
 );
 
 export const actions = {
   acLogin: (data) => ({
     type: actionTypes.Login,
-    payload: {data},
+    payload: { data },
   }),
   acLogout: () => ({
     type: actionTypes.Logout,

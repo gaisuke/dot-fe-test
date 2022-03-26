@@ -1,28 +1,31 @@
-import { Form, Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./index.css";
-import { useEffect, useState } from "react";
-import ListServis from "./ListServis";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import SelectProvince from "./component/SelectProvince";
-import SelectCity from "./component/SelectCity";
-import { GetCity, GetTarif } from "./ReduxApp/CRUD";
-import * as acAuth from "./../Auth/ReduxAuth/Redux";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable react/no-array-index-key */
+import { Form, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+import React, { useEffect, useState } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import ListServis from './ListServis';
+import SelectProvince from './component/SelectProvince';
+import SelectCity from './component/SelectCity';
+import { GetCity, GetTarif } from './ReduxApp/CRUD';
+import * as acAuth from '../Auth/ReduxAuth/Redux';
 
 function CekOngkir() {
   const dataList = useSelector(({ data }) => data, shallowEqual);
 
   const [param, setParam] = useState({});
-  const [idProvince, setIdProvince] = useState("");
-  const [city, setCity] = useState("");
-  const [idProvince2, setIdProvince2] = useState("");
-  const [city2, setCity2] = useState("");
+  const [idProvince, setIdProvince] = useState('');
+  const [city, setCity] = useState('');
+  const [idProvince2, setIdProvince2] = useState('');
+  const [city2, setCity2] = useState('');
   const [finalData, setFinalData] = useState({
-    origin: "",
-    destination: "",
+    origin: '',
+    destination: '',
     weight: 0,
-    courier: "",
+    courier: '',
   });
   const [ongkir, setOngkir] = useState([]);
   const dispatch = useDispatch();
@@ -33,27 +36,27 @@ function CekOngkir() {
   });
 
   useEffect(() => {
-    if (idProvince !== "") {
+    if (idProvince !== '') {
       GetCity(idProvince)
         .then((res) => {
           const cityList = res?.data?.rajaongkir?.results;
           setCity(cityList);
         })
         .catch(() => {
-          console.log("error city");
+          console.log('error city');
         });
     }
   }, [idProvince]);
 
   useEffect(() => {
-    if (idProvince2 !== "") {
+    if (idProvince2 !== '') {
       GetCity(idProvince2)
         .then((res) => {
           const cityList = res?.data?.rajaongkir?.results;
           setCity2(cityList);
         })
         .catch(() => {
-          console.log("error province");
+          console.log('error province');
         });
     }
   }, [idProvince2]);
@@ -107,25 +110,24 @@ function CekOngkir() {
   };
 
   const CariTarifHandler = () => {
-      //if(finalData.origin!==""&&finalData.destination!==""&&finalData.weight!==0){
-        GetTarif(finalData)
-        .then((restarif) => {
-          setOngkir(restarif?.data?.rajaongkir?.results[0]);
-        })
-        .catch(() => {
-            alert("harap isikan : asal, tujuan,berat dan perusahaan pengiriman")
-        });
-      //}
-      
+    // if(finalData.origin!==""&&finalData.destination!==""&&finalData.weight!==0){
+    GetTarif(finalData)
+      .then((restarif) => {
+        setOngkir(restarif?.data?.rajaongkir?.results[0]);
+      })
+      .catch(() => {
+        alert('harap isikan : asal, tujuan,berat dan perusahaan pengiriman');
+      });
+    // }
+
     //   else{
     //       alert("harap isikan : asal, tujuan,berat dan perusahaan pengiriman")
     //   }
-    
   };
 
   const logoutHandler = () => {
     dispatch(acAuth.actions.acLogout());
-    setTimeout(() => nav("/login", { replace: true }), 3000);
+    setTimeout(() => nav('/login', { replace: true }), 3000);
   };
 
   if (param?.data?.results !== undefined) {
@@ -145,9 +147,9 @@ function CekOngkir() {
           </div>
 
           <div className="row m-0 my-4">
-          <div className="col-md-5"><h5>Asal</h5></div>
-          <div className="col-md-2"></div>
-          <div className="col-md-5"><h5>Tujuan</h5></div>
+            <div className="col-md-5"><h5>Asal</h5></div>
+            <div className="col-md-2" />
+            <div className="col-md-5"><h5>Tujuan</h5></div>
             <div className="col-md-2">
               <p className="mt-2">Provinsi</p>
               <p className="mt-4">Kota</p>
@@ -157,10 +159,10 @@ function CekOngkir() {
                 data={param?.data?.results}
                 eventHandler={provinceSelected}
               />
-              {city !== "" ? (
+              {city !== '' ? (
                 <SelectCity data={city} eventHandler={citySelected} />
               ) : (
-                ""
+                ''
               )}
             </div>
             <div className="col-md-2 text-center middle">
@@ -175,10 +177,10 @@ function CekOngkir() {
                 data={param?.data?.results}
                 eventHandler={provinceSelected2}
               />
-              {city2 !== "" ? (
+              {city2 !== '' ? (
                 <SelectCity data={city2} eventHandler={citySelected2} />
               ) : (
-                ""
+                ''
               )}
             </div>
             <div className="col-md-2">
@@ -195,7 +197,7 @@ function CekOngkir() {
             <div className="col-md-1">
               <p className="mt-2">Gram</p>
             </div>
-            <div className="col-md-2"></div>
+            <div className="col-md-2" />
             <div className="col-md-2">
               <p className="mt-2">Pengiriman</p>
             </div>
@@ -225,16 +227,13 @@ function CekOngkir() {
             </Button>
           </div>
           <div className="col-md-12">
-            {ongkir?.costs?.map((item, key) => {
-              return <ListServis data={item} key={"ongkir-" + key} />;
-            })}
+            {ongkir?.costs?.map((item, key) => <ListServis data={item} key={`ongkir-${key}`} />)}
           </div>
         </div>
       </div>
     );
-  } else {
-    return "progress";
   }
+  return 'progress';
 }
 
 export default CekOngkir;

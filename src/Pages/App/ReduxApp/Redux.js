@@ -1,8 +1,12 @@
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+/* eslint-disable prefer-const */
+/* eslint-disable object-shorthand */
+/* eslint-disable spaced-comment */
+/* eslint-disable default-param-last */
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 export const actionTypes = {
-  Province: "province-data",
+  Province: 'province-data',
 };
 
 const initialState = {
@@ -11,7 +15,7 @@ const initialState = {
 };
 
 export const reducer = persistReducer(
-  { storage, key: "dataRoot", whitelist: ['auth'] },
+  { storage, key: 'dataRoot', whitelist: ['auth'] },
   (state = initialState, action) => {
     //state = [] , action
     switch (action.type) {
@@ -23,12 +27,12 @@ export const reducer = persistReducer(
       default:
         return state;
     }
-  }
+  },
 );
 
 export const actions = {
   acProvince: (data) => ({
     type: actionTypes.Province,
-    payload: {data},
+    payload: { data },
   }),
 };

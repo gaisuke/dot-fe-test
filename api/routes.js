@@ -1,31 +1,33 @@
-const express = require("express");
-const router = express.Router();
-var http = require("https");
-const { init } = require("rajaongkir-node-js");
-const request = init("f6542dedd3c82849d0e33a16614145ee", "starter");
+/* eslint-disable eqeqeq */
+const express = require('express');
 
-router.get("/provinsi", function (req, res) {
-  const province = request.get("/province");
+const router = express.Router();
+const { init } = require('rajaongkir-node-js');
+
+const request = init(process.env.REACT_APP_API_KEY, 'starter');
+
+router.get('/provinsi', (req, res) => {
+  const province = request.get('/province');
   province
     .then((prov) => {
-      let js = JSON.parse(prov);
+      const js = JSON.parse(prov);
       res.send(js);
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.log(error);
       console.log(request);
     });
 });
 
-router.get("/kota/:id", function (req, res) {
+router.get('/kota/:id', (req, res) => {
   const allCityInProvince = request.get(`/city?&province=${req.params.id}`);
   allCityInProvince.then((city) => {
-    let citi = JSON.parse(city);
+    const citi = JSON.parse(city);
     res.send(citi);
   });
 });
 
-router.post("/ongkir", function (req, res) {
+router.post('/ongkir', (req, res) => {
   const form = req.body;
   const data = {
     origin: form.origin,
@@ -33,19 +35,19 @@ router.post("/ongkir", function (req, res) {
     weight: form.weight,
     courier: form.courier, // bisa merequest satu atau beberapa kurir sekaligus
   };
-  const cost = request.post("cost", data);
+  const cost = request.post('cost', data);
   cost.then((cst) => {
     res.send(cst);
   });
 });
 
-router.post("/auth", function (req, res) {
-    const form = req.body;
-    if(form.username=="admin"&&form.password=="admin"){
-        res.send({status:"Berhasil",code:200,token:"this-is-token"});
-    }else{
-        res.send({status:"Gagal",code:500});
-    }
+router.post('/auth', (req, res) => {
+  const form = req.body;
+  if (form.username == 'admin' && form.password == 'admin') {
+    res.send({ status: 'Berhasil', code: 200, token: 'this-is-token' });
+  } else {
+    res.send({ status: 'Gagal', code: 500 });
+  }
 });
 
 module.exports = router;

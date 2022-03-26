@@ -1,39 +1,42 @@
-import { Form, Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./index.css";
-import { useEffect, useState } from "react";
-import { GetAuth } from "./ReduxAuth/CRUD";
-import { useDispatch } from "react-redux";
-import * as acAuth from "./ReduxAuth/Redux";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable eqeqeq */
+import { Form, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { GetAuth } from './ReduxAuth/CRUD';
+import * as acAuth from './ReduxAuth/Redux';
 
 function Auth() {
   const dispatch = useDispatch();
   const nav = useNavigate();
 
   const [finalData, setFinalData] = useState({
-    username: "admin",
-    password: "admin",
+    username: 'admin',
+    password: 'admin',
   });
 
   function loginHandler(e) {
     e.preventDefault();
-    if (finalData.username !== "" && finalData.password !== "") {
+    if (finalData.username !== '' && finalData.password !== '') {
       GetAuth(finalData)
         .then((res) => {
           if (res.data.code == 200) {
             dispatch(acAuth.actions.acLogin(res.data));
-            setTimeout(() => nav("/app", { replace: true }), 3000);
+            setTimeout(() => nav('/app', { replace: true }), 3000);
 
-            //nav('/app',{replace:true})
+            // nav('/app',{replace:true})
           }
-          //setStatus(res.data);
+          // setStatus(res.data);
         })
         .catch(() => {
-          console.log("error auth");
+          console.log('error auth');
         });
     } else {
-      alert("username&password tidak boleh kosong");
+      alert('username&password tidak boleh kosong');
     }
   }
 
@@ -78,7 +81,7 @@ function Auth() {
               value={finalData.password}
             />
           </Form.Group>
-          <Form.Group className="mb-3"></Form.Group>
+          <Form.Group className="mb-3" />
           <Button variant="primary" type="submit">
             Submit
           </Button>

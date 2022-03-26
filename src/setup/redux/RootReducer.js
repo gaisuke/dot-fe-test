@@ -1,7 +1,8 @@
-import { combineReducers } from "redux";
+/* eslint-disable import/prefer-default-export */
+import { combineReducers } from 'redux';
 
-import * as data from "./../../Pages/App/ReduxApp/Redux";
-import * as auth from "./../../Pages/Auth/ReduxAuth/Redux";
+import * as data from '../../Pages/App/ReduxApp/Redux';
+import * as auth from '../../Pages/Auth/ReduxAuth/Redux';
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
