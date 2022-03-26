@@ -1,0 +1,16 @@
+.Container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-container {
+  width: 40vw;
+  height: 50vh;
+  padding: 20px;
+  border: 1px solid #3f3d56;
+  border-radius: 10px;
+  text-align: left;
+}

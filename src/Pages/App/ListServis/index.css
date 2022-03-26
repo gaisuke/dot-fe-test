@@ -1,0 +1,9 @@
+
+.list-servis {
+    width: 100%;
+    padding: 10px;
+    border: 1px dashed #aeabcf;
+    border-radius: 5px;
+    text-align: left;
+    margin: 1rem 0;
+  }

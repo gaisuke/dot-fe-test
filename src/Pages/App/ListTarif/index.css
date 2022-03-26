@@ -1,0 +1,10 @@
+.list-tarif {
+  width: 150px;
+  height: 70px;
+  padding: 7px;
+  border-radius: 5px;
+  background-color: #7d83ff;
+  margin: 10px 10px 10px 0;
+  font-weight: bolder;
+  color: #fefefe;
+}

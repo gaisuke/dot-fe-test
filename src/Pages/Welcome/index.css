@@ -1,0 +1,28 @@
+.Container {
+  text-align: center;
+  height: 100vh;
+  padding: 10vh;
+}
+
+.align-right{
+    text-align: right;
+}
+
+.Logo {
+  height: 40vmin;
+  pointer-events: none;
+  margin: 2rem auto;
+}
+
+.btn-login{
+    width: 200px;
+    margin: 2rem auto;
+}
+
+.text-black{
+    color: #000;
+}
+
+
+
+
