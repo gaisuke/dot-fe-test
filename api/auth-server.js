@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const dataRouter = require('../api/routes');
+const dataRouter = require('./routes');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
